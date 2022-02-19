@@ -3,17 +3,27 @@ package tiktactoe;
 public class Game 
 {
 	
-	private Player[][] gameBoard;
+	private Player[] gameBoard;
 	
-	enum Player
+	public enum Player
 	{
 		X,
-		O
+		O,
+		Empty
+		
 	}
 	
+	/**
+	 * Generic Constructor of the Game class, representing all squares as empty players to begin with
+	 */
 	public Game() 
 	{
-		gameBoard = new Player[3][3];
+		gameBoard = new Player[9];
+		
+		for( int i = 0; i < 9; i++ )
+		{
+			gameBoard[i] = Player.Empty;
+		}
 	}
 	
 	
