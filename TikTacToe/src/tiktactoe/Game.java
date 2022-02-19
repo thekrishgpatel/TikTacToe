@@ -3,6 +3,7 @@ package tiktactoe;
 public class Game 
 {
 	
+	//Master GameBoard
 	private Player[] gameBoard;
 	
 	public enum Player
