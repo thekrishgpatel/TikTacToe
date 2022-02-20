@@ -4,7 +4,7 @@ public class Game
 {
 	
 	//Master GameBoard
-	private Player[] gameBoard;
+	private GameBoard masterGameBoard;
 	
 	public enum Player
 	{
@@ -13,18 +13,12 @@ public class Game
 		Empty
 		
 	}
-	
 	/**
 	 * Generic Constructor of the Game class, representing all squares as empty players to begin with
 	 */
 	public Game() 
 	{
-		gameBoard = new Player[9];
-		
-		for( int i = 0; i < 9; i++ )
-		{
-			makeMove(Player.Empty, i);
-		}
+		masterGameBoard = new GameBoard();
 	}
 	
 	/**
@@ -37,7 +31,7 @@ public class Game
 		//find a piece of the player
 		//index i, is the first piece of the player
 		int i;
-		for ( i = 0; i < 9 && gameBoard[i] != user ; i++ )
+		for ( i = 0; i < 9 && masterGameBoard.getAt(i) != user ; i++ )
 		{
 			;
 		}
@@ -46,14 +40,14 @@ public class Game
 		if ( i == 0 || i == 1 || i == 2 || i == 3 || i == 6 )
 		{
 			//check if a column is made
-			if ( gameBoard[(i + 3) % 9] == user &&  gameBoard[(i + 6) % 9] == user )
+			if ( masterGameBoard.getAt((i + 3) % 9) == user &&  masterGameBoard.getAt((i + 6) % 9) == user )
 			{
 				return true;
 			}
 			
 			//check if a row is made
 			//TODO: The mod 3 does not work
-			if ( gameBoard[i+1] == user && gameBoard[i+2] == user )
+			if ( masterGameBoard.getAt(i+1) == user && masterGameBoard.getAt(i+2) == user )
 			{
 				return true;
 			}
@@ -61,14 +55,14 @@ public class Game
 			//check if a diagonal is made
 			if( i == 0 || i== 8 )
 			{
-				if ( gameBoard[(i+4)%9] == user && gameBoard[(i+8)%9] == user )
+				if ( masterGameBoard.getAt((i+4)%9) == user && masterGameBoard.getAt((i+8)%9) == user )
 				{
 					return true;
 				}
 			}
 			else
 			{
-				if ( gameBoard[(i+2)%9] == user && gameBoard[(i+4)%9] == user )
+				if ( masterGameBoard.getAt((i+2)%9) == user && masterGameBoard.getAt((i+4)%9) == user )
 				{
 					return true;
 				}
@@ -88,7 +82,14 @@ public class Game
 	 */
 	public void makeMove(Player user, int position)
 	{
-		gameBoard[position] = user;
+		if( validMove(position) )
+		{
+			masterGameBoard.placePiece(user, position);
+		}
+		else
+		{
+			System.out.println("This is not a valid move");
+		}
 		return;
 	}
 	
@@ -100,55 +101,15 @@ public class Game
 	private boolean validMove(int position)
 	{
 		//checks if a move at index 'position' is valid or not
-		return (gameBoard[position] == Player.Empty) ? true : false;
+		return (masterGameBoard.getAt(position) == Player.Empty) ? true : false;
 	}
 	
 	/**
-	 * This method prints the board, using a for loop to traverse through the gameBoard
-	 * @param NullPointerException 
-	 * @throws Exception 
+	 * This method calls the GameBoard class' toString method, in order to print the current state of the board
 	 */
 	public void printBoard()
 	{
-		String board = "";
-		
-		for ( int i = 0; i < 9; i++ )
-		{
-			if ( gameBoard[i] == null )
-			{
-				throw new NullPointerException("GameBoard cannot be null");
-			}
-			switch (gameBoard[i]) 
-			{
-				case X: 
-					board = board.concat("X");
-					break;
-				case O:
-					board = board.concat("O");
-					break;
-				case Empty:
-					board = board.concat(" ");
-					break;
-				default:
-					System.out.println("Something Went Wrong");
-			}
-			
-			if( i == 2 || i == 5 )
-			{
-				board = board.concat("\n");
-				board = board.concat("--------\n");
-			}
-			
-			if( i%3 != 2 )
-			{
-				board = board.concat(" | ");
-			}
-			
-
-		}
-		
-		System.out.println(board);
-		return;
+		System.out.println(masterGameBoard);
 	}
 
 	
