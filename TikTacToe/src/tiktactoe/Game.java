@@ -5,7 +5,6 @@ public class Game
 	
 	//Master GameBoard
 	private Player[] gameBoard;
-	private boolean start = false;
 	
 	public enum Player
 	{
@@ -35,7 +34,50 @@ public class Game
 	 */
 	public boolean isWon(Player user)
 	{
-		return true;
+		//find a piece of the player
+		//index i, is the first piece of the player
+		int i;
+		for ( i = 0; i < 9 && gameBoard[i] != user ; i++ )
+		{
+			;
+		}
+		
+		//All winning positions require the first located piece to be one of these (0,1,2,3,6)
+		if ( i == 0 || i == 1 || i == 2 || i == 3 || i == 6 )
+		{
+			//check if a column is made
+			if ( gameBoard[(i + 3) % 9] == user &&  gameBoard[(i + 6) % 9] == user )
+			{
+				return true;
+			}
+			
+			//check if a row is made
+			//TODO: The mod 3 does not work
+			if ( gameBoard[i+1] == user && gameBoard[i+2] == user )
+			{
+				return true;
+			}
+			
+			//check if a diagonal is made
+			if( i == 0 || i== 8 )
+			{
+				if ( gameBoard[(i+4)%9] == user && gameBoard[(i+8)%9] == user )
+				{
+					return true;
+				}
+			}
+			else
+			{
+				if ( gameBoard[(i+2)%9] == user && gameBoard[(i+4)%9] == user )
+				{
+					return true;
+				}
+			}
+		}
+		
+		
+		
+		return false;
 	}
 	
 	/**
@@ -44,8 +86,9 @@ public class Game
 	 * @param position
 	 * @return
 	 */
-	private void makeMove(Player user, int position)
+	public void makeMove(Player user, int position)
 	{
+		gameBoard[position] = user;
 		return;
 	}
 	
@@ -56,7 +99,8 @@ public class Game
 	 */
 	private boolean validMove(int position)
 	{
-		return false;
+		//checks if a move at index 'position' is valid or not
+		return (gameBoard[position] == Player.Empty) ? true : false;
 	}
 	
 	/**
@@ -64,8 +108,43 @@ public class Game
 	 */
 	public void printBoard()
 	{
+		String board = "";
+		for ( int i = 0; i < 9; i++ )
+		{
+			switch (gameBoard[i]) 
+			{
+				case X: 
+					board = board.concat("X");
+					break;
+				case O:
+					board = board.concat("O");
+					break;
+				case Empty:
+					board = board.concat(" ");
+					break;
+				default:
+					System.out.println("Something went wrong");
+					break;
+			}
+			
+			if( i == 2 || i == 5 )
+			{
+				board = board.concat("\n");
+				board = board.concat("--------\n");
+			}
+			
+			if( i%3 != 2 )
+			{
+				board = board.concat(" | ");
+			}
+			
+
+		}
+		
+		System.out.println(board);
 		return;
 	}
+
 	
 	/**
 	 * Using a minimax tree, the method will return a integer representing the next best move for the computer
@@ -77,9 +156,29 @@ public class Game
 		return Integer.MIN_VALUE;
 	}
 	
+	
 	public static void main(String[] args) 
 	{
-		// TODO Auto-generated method stub
+		Game g1 = new Game();
+		
+//		for( int i = 0; i < 9; i++ )
+//		{
+//			if( i%2 == 0)
+//			{
+//				g1.makeMove(Player.X, i);
+//			}
+//			else
+//			{
+//				g1.makeMove(Player.O, i);
+//			}
+//		}
+		
+		g1.makeMove(Player.X, 6);
+		g1.makeMove(Player.X, 4);
+		g1.makeMove(Player.X, 2);
+		
+		g1.printBoard();
+ 		System.out.println( g1.isWon(Player.X) );
 
 	}
 
