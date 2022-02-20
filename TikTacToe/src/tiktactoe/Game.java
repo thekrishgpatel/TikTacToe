@@ -105,12 +105,19 @@ public class Game
 	
 	/**
 	 * This method prints the board, using a for loop to traverse through the gameBoard
+	 * @param NullPointerException 
+	 * @throws Exception 
 	 */
 	public void printBoard()
 	{
 		String board = "";
+		
 		for ( int i = 0; i < 9; i++ )
 		{
+			if ( gameBoard[i] == null )
+			{
+				throw new NullPointerException("GameBoard cannot be null");
+			}
 			switch (gameBoard[i]) 
 			{
 				case X: 
@@ -123,8 +130,7 @@ public class Game
 					board = board.concat(" ");
 					break;
 				default:
-					System.out.println("Something went wrong");
-					break;
+					System.out.println("Something Went Wrong");
 			}
 			
 			if( i == 2 || i == 5 )
@@ -151,6 +157,7 @@ public class Game
 	 * @param user
 	 * @return
 	 */
+	//TODO: Create the minimax tree, and means of move selection
 	public int findNextMove(Player user)
 	{
 		return Integer.MIN_VALUE;
@@ -160,18 +167,6 @@ public class Game
 	public static void main(String[] args) 
 	{
 		Game g1 = new Game();
-		
-//		for( int i = 0; i < 9; i++ )
-//		{
-//			if( i%2 == 0)
-//			{
-//				g1.makeMove(Player.X, i);
-//			}
-//			else
-//			{
-//				g1.makeMove(Player.O, i);
-//			}
-//		}
 		
 		g1.makeMove(Player.X, 6);
 		g1.makeMove(Player.X, 4);
