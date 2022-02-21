@@ -4,17 +4,18 @@ public class Game
 {
 	
 	//Master GameBoard
-	private GameBoard masterGameBoard;
+	public GameBoard masterGameBoard;
 	
-	public enum Player
+	public enum playerSymbol
 	{
 		X,
 		O,
 		Empty
 		
 	}
+	
 	/**
-	 * Generic Constructor of the Game class, representing all squares as empty players to begin with
+	 * Generic Constructor of the Game class
 	 */
 	public Game() 
 	{
@@ -26,12 +27,13 @@ public class Game
 	 * @param user
 	 * @return
 	 */
-	public boolean isWon(Player user)
+	public boolean isWon( Player player )
 	{
 		//find a piece of the player
 		//index i, is the first piece of the player
+		playerSymbol playerSymbol = player.symbol;
 		int i;
-		for ( i = 0; i < 9 && masterGameBoard.getAt(i) != user ; i++ )
+		for ( i = 0; i < 9 && masterGameBoard.getAt(i) != playerSymbol ; i++ )
 		{
 			;
 		}
@@ -40,14 +42,13 @@ public class Game
 		if ( i == 0 || i == 1 || i == 2 || i == 3 || i == 6 )
 		{
 			//check if a column is made
-			if ( masterGameBoard.getAt((i + 3) % 9) == user &&  masterGameBoard.getAt((i + 6) % 9) == user )
+			if ( masterGameBoard.getAt((i + 3) % 9) == playerSymbol &&  masterGameBoard.getAt((i + 6) % 9) == playerSymbol )
 			{
 				return true;
 			}
 			
 			//check if a row is made
-			//TODO: The mod 3 does not work
-			if ( masterGameBoard.getAt(i+1) == user && masterGameBoard.getAt(i+2) == user )
+			if ( masterGameBoard.getAt(i+1) == playerSymbol && masterGameBoard.getAt(i+2) == playerSymbol )
 			{
 				return true;
 			}
@@ -55,14 +56,14 @@ public class Game
 			//check if a diagonal is made
 			if( i == 0 || i== 8 )
 			{
-				if ( masterGameBoard.getAt((i+4)%9) == user && masterGameBoard.getAt((i+8)%9) == user )
+				if ( masterGameBoard.getAt((i+4)%9) == playerSymbol && masterGameBoard.getAt((i+8)%9) == playerSymbol )
 				{
 					return true;
 				}
 			}
 			else
 			{
-				if ( masterGameBoard.getAt((i+2)%9) == user && masterGameBoard.getAt((i+4)%9) == user )
+				if ( masterGameBoard.getAt((i+2)%9) == playerSymbol && masterGameBoard.getAt((i+4)%9) == playerSymbol )
 				{
 					return true;
 				}
@@ -80,16 +81,18 @@ public class Game
 	 * @param position
 	 * @return
 	 */
-	public void makeMove(Player user, int position)
+	public void makeMove(Player player, int position)
 	{
-		if( validMove(position) )
+		
+		playerSymbol symbol = player.symbol; 
+		
+		while ( !validMove(position) )
 		{
-			masterGameBoard.placePiece(user, position);
+			position = player.getMove();
 		}
-		else
-		{
-			System.out.println("This is not a valid move");
-		}
+
+		masterGameBoard.placePiece(symbol, position);
+
 		return;
 	}
 	
@@ -101,7 +104,7 @@ public class Game
 	private boolean validMove(int position)
 	{
 		//checks if a move at index 'position' is valid or not
-		return (masterGameBoard.getAt(position) == Player.Empty) ? true : false;
+		return (masterGameBoard.getAt(position) == playerSymbol.Empty) ? true : false;
 	}
 	
 	/**
@@ -119,23 +122,10 @@ public class Game
 	 * @return
 	 */
 	//TODO: Create the minimax tree, and means of move selection
-	public int findNextMove(Player user)
+	public int findNextMove(playerSymbol user)
 	{
 		return Integer.MIN_VALUE;
 	}
-	
-	
-	public static void main(String[] args) 
-	{
-		Game g1 = new Game();
-		
-		g1.makeMove(Player.X, 6);
-		g1.makeMove(Player.X, 4);
-		g1.makeMove(Player.X, 2);
-		
-		g1.printBoard();
- 		System.out.println( g1.isWon(Player.X) );
 
-	}
 
 }

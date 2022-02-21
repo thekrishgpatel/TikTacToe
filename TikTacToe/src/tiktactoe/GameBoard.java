@@ -1,30 +1,46 @@
 package tiktactoe;
 
-import tiktactoe.Game.Player;
+import java.util.ArrayList;
+
+import tiktactoe.Game.playerSymbol;
 
 public class GameBoard 
 {
-	private Player[] board;
+	private playerSymbol[] board;
 	private int numEmptySpaces;
+	//The usage of the below member data is not yet implemented 
+	ArrayList<Integer> availablePositions;
 
 	
 	public GameBoard() 
 	{
 		numEmptySpaces = 9;
-		board = new Player[9];
+		board = new playerSymbol[9];
+		availablePositions = new ArrayList<>();
 		
 		for( int i = 0; i < 9; i++ )
 		{
-			board[i] = Player.Empty; 
+			availablePositions.add(i);
+			board[i] = playerSymbol.Empty; 
 		}
 	}
 	
-	public void placePiece(Player user, int position)
+	public void placePiece(playerSymbol symbol, int position)
 	{
-		board[position] = user; 
+
+		board[position] = symbol;
+		
+		//removes the number position from the arraylist of available positions
+		for( int i = 0; i < availablePositions.size(); i++ )
+		{
+			if ( availablePositions.get(i) == position )
+			{
+				availablePositions.remove(i);
+			}
+		}
 	}
 	
-	public Player getAt(int position)
+	public playerSymbol getAt(int position)
 	{
 		return board[position];
 	}
@@ -72,9 +88,5 @@ public class GameBoard
 		return stringBoard;
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
