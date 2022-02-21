@@ -48,7 +48,7 @@ public class GameBoard
 	@Override
 	public String toString() 
 	{
-		String stringBoard = "";
+		String stringBoard = "\n";
 		
 		for ( int i = 0; i < 9; i++ )
 		{
@@ -85,7 +85,7 @@ public class GameBoard
 
 		}
 		
-		return stringBoard;
+		return stringBoard + "\n";
 	}
 	
 

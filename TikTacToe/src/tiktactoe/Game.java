@@ -31,9 +31,8 @@ public class Game
 	{
 		//find a piece of the player
 		//index i, is the first piece of the player
-		playerSymbol playerSymbol = player.symbol;
 		int i;
-		for ( i = 0; i < 9 && masterGameBoard.getAt(i) != playerSymbol ; i++ )
+		for ( i = 0; i < 9 && masterGameBoard.getAt(i) != player.symbol ; i++ )
 		{
 			;
 		}
@@ -42,13 +41,13 @@ public class Game
 		if ( i == 0 || i == 1 || i == 2 || i == 3 || i == 6 )
 		{
 			//check if a column is made
-			if ( masterGameBoard.getAt((i + 3) % 9) == playerSymbol &&  masterGameBoard.getAt((i + 6) % 9) == playerSymbol )
+			if ( masterGameBoard.getAt((i + 3) % 9) == player.symbol &&  masterGameBoard.getAt((i + 6) % 9) == player.symbol )
 			{
 				return true;
 			}
 			
 			//check if a row is made
-			if ( masterGameBoard.getAt(i+1) == playerSymbol && masterGameBoard.getAt(i+2) == playerSymbol )
+			if ( masterGameBoard.getAt(i+1) == player.symbol && masterGameBoard.getAt(i+2) == player.symbol )
 			{
 				return true;
 			}
@@ -56,14 +55,14 @@ public class Game
 			//check if a diagonal is made
 			if( i == 0 || i== 8 )
 			{
-				if ( masterGameBoard.getAt((i+4)%9) == playerSymbol && masterGameBoard.getAt((i+8)%9) == playerSymbol )
+				if ( masterGameBoard.getAt((i+4)%9) == player.symbol && masterGameBoard.getAt((i+8)%9) == player.symbol )
 				{
 					return true;
 				}
 			}
 			else
 			{
-				if ( masterGameBoard.getAt((i+2)%9) == playerSymbol && masterGameBoard.getAt((i+4)%9) == playerSymbol )
+				if ( masterGameBoard.getAt((i+2)%9) == player.symbol && masterGameBoard.getAt((i+4)%9) == player.symbol )
 				{
 					return true;
 				}
@@ -86,7 +85,7 @@ public class Game
 		
 		playerSymbol symbol = player.symbol; 
 		
-		while ( !validMove(position) )
+		while ( !isPositionValid(position) )
 		{
 			position = player.getMove();
 		}
@@ -101,7 +100,7 @@ public class Game
 	 * @param position
 	 * @return
 	 */
-	private boolean validMove(int position)
+	private boolean isPositionValid(int position)
 	{
 		//checks if a move at index 'position' is valid or not
 		return (masterGameBoard.getAt(position) == playerSymbol.Empty) ? true : false;

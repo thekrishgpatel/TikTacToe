@@ -14,6 +14,7 @@ public class HumanPlayer extends Player
 	@Override
 	public int getMove() 
 	{		
+		System.out.print("Your Position: ");
 		return (new Scanner(System.in)).nextInt();
 	}
 

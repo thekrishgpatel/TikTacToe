@@ -13,6 +13,8 @@ public class RandomComputerPlayer extends Player
 	public int getMove() 
 	{
 		Random rand = new Random();
-		return rand.nextInt(9);
+		int computerPosition = rand.nextInt(9);
+		System.out.println("Computer Position: " + computerPosition);
+		return computerPosition;
 	}
 }
