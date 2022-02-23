@@ -7,7 +7,8 @@ public class Tester {
 	public static void main(String[] args) 
 	{
 		Game g1 = new Game();
-		RandomComputerPlayer p1 = new RandomComputerPlayer(playerSymbol.X);
+//		RandomComputerPlayer p1 = new RandomComputerPlayer(playerSymbol.X);
+		HumanPlayer p1 = new HumanPlayer(playerSymbol.X);
 		HumanPlayer h2 = new HumanPlayer(playerSymbol.O);
 //		RandomComputerPlayer h2 = new RandomComputerPlayer(playerSymbol.O);
 		

@@ -83,14 +83,12 @@ public class Game
 	public void makeMove(Player player, int position)
 	{
 		
-		playerSymbol symbol = player.symbol; 
-		
 		while ( !isPositionValid(position) )
 		{
 			position = player.getMove();
 		}
 
-		masterGameBoard.placePiece(symbol, position);
+		masterGameBoard.placePiece(player.symbol, position);
 
 		return;
 	}
