@@ -12,15 +12,15 @@ public class Tester {
 		HumanPlayer h2 = new HumanPlayer(playerSymbol.O);
 //		RandomComputerPlayer h2 = new RandomComputerPlayer(playerSymbol.O);
 		
-		while ( !g1.isWon(h2) && !g1.isWon(p1) )
+		while ( !g1.isWon(h2.symbol) && !g1.isWon(p1.symbol) )
 		{
-			g1.makeMove(p1, p1.getMove());
+			g1.makeMove(p1, p1.getMove(g1,g1.masterGameBoard.availablePositions));
 			g1.printBoard();
-			g1.makeMove(h2, h2.getMove());
+			g1.makeMove(h2, h2.getMove(g1,g1.masterGameBoard.availablePositions));
 			g1.printBoard();
 		}
 		
-		if ( g1.isWon(h2)  )
+		if ( g1.isWon(h2.symbol)  )
 		{
 			if( h2.symbol == playerSymbol.X )
 				System.out.println("X has won" );

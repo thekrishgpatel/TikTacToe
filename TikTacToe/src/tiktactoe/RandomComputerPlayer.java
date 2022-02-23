@@ -1,5 +1,7 @@
 package tiktactoe;
 import tiktactoe.Game.*;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomComputerPlayer extends Player 
@@ -10,7 +12,7 @@ public class RandomComputerPlayer extends Player
 	}
 
 	@Override
-	public int getMove() 
+	public int getMove(Game game, ArrayList<Integer> availableSpots) 
 	{
 		Random rand = new Random();
 		int computerPosition = rand.nextInt(9);

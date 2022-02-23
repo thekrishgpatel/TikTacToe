@@ -1,4 +1,6 @@
 package tiktactoe;
+import java.util.ArrayList;
+
 import tiktactoe.Game.*;
 
 public abstract class Player 
@@ -10,5 +12,5 @@ public abstract class Player
 		this.symbol = symbol;
 	}
 	
-	public abstract int getMove();
+	public abstract int getMove(Game game, ArrayList<Integer> availableSpots);
 }

@@ -27,12 +27,13 @@ public class Game
 	 * @param user
 	 * @return
 	 */
-	public boolean isWon( Player player )
+	public boolean isWon( playerSymbol symbol )
 	{
+	
 		//find a piece of the player
 		//index i, is the first piece of the player
 		int i;
-		for ( i = 0; i < 9 && masterGameBoard.getAt(i) != player.symbol ; i++ )
+		for ( i = 0; i < 9 && masterGameBoard.getAt(i) != symbol ; i++ )
 		{
 			;
 		}
@@ -41,13 +42,13 @@ public class Game
 		if ( i == 0 || i == 1 || i == 2 || i == 3 || i == 6 )
 		{
 			//check if a column is made
-			if ( masterGameBoard.getAt((i + 3) % 9) == player.symbol &&  masterGameBoard.getAt((i + 6) % 9) == player.symbol )
+			if ( masterGameBoard.getAt((i + 3) % 9) == symbol &&  masterGameBoard.getAt((i + 6) % 9) == symbol )
 			{
 				return true;
 			}
 			
 			//check if a row is made
-			if ( masterGameBoard.getAt(i+1) == player.symbol && masterGameBoard.getAt(i+2) == player.symbol )
+			if ( masterGameBoard.getAt(i+1) == symbol && masterGameBoard.getAt(i+2) == symbol )
 			{
 				return true;
 			}
@@ -55,14 +56,14 @@ public class Game
 			//check if a diagonal is made
 			if( i == 0 || i== 8 )
 			{
-				if ( masterGameBoard.getAt((i+4)%9) == player.symbol && masterGameBoard.getAt((i+8)%9) == player.symbol )
+				if ( masterGameBoard.getAt((i+4)%9) == symbol && masterGameBoard.getAt((i+8)%9) == symbol )
 				{
 					return true;
 				}
 			}
 			else
 			{
-				if ( masterGameBoard.getAt((i+2)%9) == player.symbol && masterGameBoard.getAt((i+4)%9) == player.symbol )
+				if ( masterGameBoard.getAt((i+2)%9) == symbol && masterGameBoard.getAt((i+4)%9) == symbol )
 				{
 					return true;
 				}
@@ -85,7 +86,7 @@ public class Game
 		
 		while ( !isPositionValid(position) )
 		{
-			position = player.getMove();
+			position = player.getMove(this, masterGameBoard.availablePositions);
 		}
 
 		masterGameBoard.placePiece(player.symbol, position);
@@ -98,7 +99,7 @@ public class Game
 	 * @param position
 	 * @return
 	 */
-	private boolean isPositionValid(int position)
+	public boolean isPositionValid(int position)
 	{
 		//checks if a move at index 'position' is valid or not
 		return (masterGameBoard.getAt(position) == playerSymbol.Empty) ? true : false;
@@ -123,6 +124,25 @@ public class Game
 	{
 		return Integer.MIN_VALUE;
 	}
-
+	
+	public playerSymbol getWinner()
+	{
+		playerSymbol winner = playerSymbol.Empty;
+		if (  isWon(playerSymbol.O) )
+		{
+			winner = playerSymbol.O;
+		}
+		else if(  isWon(playerSymbol.X) )
+		{
+			winner = playerSymbol.X;
+		}
+		
+		return winner;
+	}
+	
+	public void removePosition( int position )
+	{
+		masterGameBoard.removePostion(position);
+	}
 
 }

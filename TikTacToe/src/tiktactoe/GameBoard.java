@@ -88,5 +88,10 @@ public class GameBoard
 		return stringBoard + "\n";
 	}
 	
+	public void removePostion( int position )
+	{
+		board[position] = playerSymbol.Empty;
+	}
+	
 
 }
