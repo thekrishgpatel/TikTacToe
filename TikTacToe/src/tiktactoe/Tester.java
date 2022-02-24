@@ -9,7 +9,7 @@ public class Tester {
 		Game g1 = new Game();
 //		RandomComputerPlayer p1 = new RandomComputerPlayer(playerSymbol.X);
 		HumanPlayer p1 = new HumanPlayer(playerSymbol.X);
-		HumanPlayer h2 = new HumanPlayer(playerSymbol.O);
+		SmartComputerPlayer h2 = new SmartComputerPlayer(playerSymbol.O);
 //		RandomComputerPlayer h2 = new RandomComputerPlayer(playerSymbol.O);
 		
 		while ( !g1.isWon(h2.symbol) && !g1.isWon(p1.symbol) )

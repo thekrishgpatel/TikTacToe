@@ -30,48 +30,38 @@ public class Game
 	public boolean isWon( playerSymbol symbol )
 	{
 	
-		//find a piece of the player
-		//index i, is the first piece of the player
-		int i;
-		for ( i = 0; i < 9 && masterGameBoard.getAt(i) != symbol ; i++ )
+		if ( masterGameBoard.getAt(0) == symbol && masterGameBoard.getAt(1) == symbol && masterGameBoard.getAt(2) == symbol )
 		{
-			;
+			return true;
 		}
-		
-		//All winning positions require the first located piece to be one of these (0,1,2,3,6)
-		if ( i == 0 || i == 1 || i == 2 || i == 3 || i == 6 )
+		if ( masterGameBoard.getAt(3) == symbol && masterGameBoard.getAt(4) == symbol && masterGameBoard.getAt(5) == symbol )
 		{
-			//check if a column is made
-			if ( masterGameBoard.getAt((i + 3) % 9) == symbol &&  masterGameBoard.getAt((i + 6) % 9) == symbol )
-			{
-				return true;
-			}
-			
-			//check if a row is made
-			if ( masterGameBoard.getAt(i+1) == symbol && masterGameBoard.getAt(i+2) == symbol )
-			{
-				return true;
-			}
-			
-			//check if a diagonal is made
-			if( i == 0 || i== 8 )
-			{
-				if ( masterGameBoard.getAt((i+4)%9) == symbol && masterGameBoard.getAt((i+8)%9) == symbol )
-				{
-					return true;
-				}
-			}
-			else
-			{
-				if ( masterGameBoard.getAt((i+2)%9) == symbol && masterGameBoard.getAt((i+4)%9) == symbol )
-				{
-					return true;
-				}
-			}
+			return true;
 		}
-		
-		
-		
+		if ( masterGameBoard.getAt(6) == symbol && masterGameBoard.getAt(7) == symbol && masterGameBoard.getAt(8) == symbol )
+		{
+			return true;
+		}
+		if ( masterGameBoard.getAt(0) == symbol && masterGameBoard.getAt(3) == symbol && masterGameBoard.getAt(6) == symbol )
+		{
+			return true;
+		}
+		if ( masterGameBoard.getAt(1) == symbol && masterGameBoard.getAt(4) == symbol && masterGameBoard.getAt(7) == symbol )
+		{
+			return true;
+		}
+		if ( masterGameBoard.getAt(2) == symbol && masterGameBoard.getAt(5) == symbol && masterGameBoard.getAt(8) == symbol )
+		{
+			return true;
+		}
+		if ( masterGameBoard.getAt(0) == symbol && masterGameBoard.getAt(4) == symbol && masterGameBoard.getAt(8) == symbol )
+		{
+			return true;
+		}
+		if ( masterGameBoard.getAt(2) == symbol && masterGameBoard.getAt(4) == symbol && masterGameBoard.getAt(6) == symbol )
+		{
+			return true;
+		}
 		return false;
 	}
 	

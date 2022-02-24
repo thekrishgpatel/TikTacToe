@@ -25,7 +25,7 @@ public class SmartComputerPlayer extends Player
 			if ( game.isPositionValid(i) )
 			{
 				game.makeMove(this, i);
-				int score = minimax(game, availableSpots);
+				int score = minimax(game, availableSpots, true);
 				game.removePosition(i);
 				
 				if ( score > bestScore )
@@ -39,71 +39,77 @@ public class SmartComputerPlayer extends Player
 		return move;
 	}
 	
-	public int minimax(Game game, ArrayList<Integer> availableSpots)
+	public int minimax(Game game, ArrayList<Integer> availableSpots, boolean isMaximizing)
 	{
+		//if isMaximizing is true, we are looking for computer players move
 	
 		playerSymbol winnerSymbol = game.getWinner();
 		
 		if ( winnerSymbol == this.symbol )
 		{
-			return 1; // * availiableSpots
+			return 1 * availableSpots.size(); // * availiableSpots
 		}
 		else if ( winnerSymbol != playerSymbol.Empty )
 		{
-			return -1; // * availiableSpots
+			return -1 * availableSpots.size(); // * availiableSpots
 		}
+		//TODO: Implement this shit
+//		else if(tie)
+//		{
+//			
+//		}
 		else
 		{
-			return 0;
-		}
-		
-		if (isMax) // comnputer player
-		{
-			int bestScore = Integer.MIN_VALUE;
-			
-			for ( int i = 0; i < 9; i++ )
+			if (isMaximizing) // comnputer player
 			{
-				// is available 
-				if ( game.isPositionValid(i) )
+				int bestScore = Integer.MIN_VALUE;
+				
+				for ( int i = 0; i < 9; i++ )
 				{
-					game.makeMove(this, i);
-					int score = minimax(game, availableSpots); // subtract 1 also set to opposite Symbol
-					game.removePosition(i);
-					
-					if ( score > bestScore )
+					// is available 
+					if ( game.isPositionValid(i) )
 					{
-						bestScore = score;
+						game.makeMove(this, i);
+						int score = minimax(game, availableSpots, false); // subtract 1 also set to opposite Symbol
+						game.removePosition(i);
+						
+						if ( score > bestScore )
+						{
+							bestScore = score;
+						}
+						
 					}
-					
 				}
+				
+				return bestScore; 
 			}
 			
-			return bestScore; 
+			else { // human player
+				
+				int bestScore = Integer.MAX_VALUE;
+				
+				for ( int i = 0; i < 9; i++ )
+				{
+					// is available 
+					if ( game.isPositionValid(i) )
+					{
+						game.makeMove(this, i);
+						int score = minimax(game, availableSpots, true); // subtract 1 also set to opposite Symbol
+						game.removePosition(i);
+						
+						if ( score < bestScore )
+						{
+							bestScore = score;
+						}
+						
+					}
+				}
+				
+				return bestScore; 
+			}
 		}
 		
-		else { // human player
-			
-			int bestScore = Integer.MAX_VALUE;
-			
-			for ( int i = 0; i < 9; i++ )
-			{
-				// is available 
-				if ( game.isPositionValid(i) )
-				{
-					game.makeMove(this, i);
-					int score = minimax(game, availableSpots); // subtract 1 also set to opposite Symbol
-					game.removePosition(i);
-					
-					if ( score < bestScore )
-					{
-						bestScore = score;
-					}
-					
-				}
-			}
-			
-			return bestScore; 
-		}
+		
 		
 //		
 //		if ( winnerSymbol != null )
