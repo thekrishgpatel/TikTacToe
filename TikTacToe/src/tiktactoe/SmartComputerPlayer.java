@@ -25,7 +25,7 @@ public class SmartComputerPlayer extends Player
 			if ( game.isPositionValid(i) )
 			{
 				game.makeMove(this, i);
-				int score = minimax(game, availableSpots, true);
+				int score = minimax(game.clone(), game.masterGameBoard.numEmptySpaces, true);
 				game.removePosition(i);
 				
 				if ( score > bestScore )
@@ -39,7 +39,7 @@ public class SmartComputerPlayer extends Player
 		return move;
 	}
 	
-	public int minimax(Game game, ArrayList<Integer> availableSpots, boolean isMaximizing)
+	public int minimax(Game game, int availableSpots, boolean isMaximizing)
 	{
 		//if isMaximizing is true, we are looking for computer players move
 	
@@ -47,17 +47,17 @@ public class SmartComputerPlayer extends Player
 		
 		if ( winnerSymbol == this.symbol )
 		{
-			return 1 * availableSpots.size(); // * availiableSpots
+			return 1 * game.masterGameBoard.numEmptySpaces; // * availiableSpots
 		}
 		else if ( winnerSymbol != playerSymbol.Empty )
 		{
-			return -1 * availableSpots.size(); // * availiableSpots
+			return -1 * game.masterGameBoard.numEmptySpaces; // * availiableSpots
 		}
 		//TODO: Implement this shit
-//		else if(tie)
-//		{
-//			
-//		}
+		else if(game.isTie())
+		{
+			return 0;
+		}
 		else
 		{
 			if (isMaximizing) // comnputer player
@@ -70,7 +70,7 @@ public class SmartComputerPlayer extends Player
 					if ( game.isPositionValid(i) )
 					{
 						game.makeMove(this, i);
-						int score = minimax(game, availableSpots, false); // subtract 1 also set to opposite Symbol
+						int score = minimax(game.clone(), availableSpots, false); // subtract 1 also set to opposite Symbol
 						game.removePosition(i);
 						
 						if ( score > bestScore )
@@ -94,8 +94,9 @@ public class SmartComputerPlayer extends Player
 					if ( game.isPositionValid(i) )
 					{
 						game.makeMove(this, i);
-						int score = minimax(game, availableSpots, true); // subtract 1 also set to opposite Symbol
+						int score = minimax(game.clone(), availableSpots, true); // subtract 1 also set to opposite Symbol
 						game.removePosition(i);
+
 						
 						if ( score < bestScore )
 						{

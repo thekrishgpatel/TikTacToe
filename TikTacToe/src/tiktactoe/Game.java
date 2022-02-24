@@ -67,7 +67,7 @@ public class Game
 	
 	public boolean isTie() 
 	{
-		if (masterGameBoard.availableSpaces.size() == 0 && isWon(playerSymbol.O) == false && isWon(playerSymbol.X) == false)
+		if (masterGameBoard.availablePositions.size() == 0 && isWon(playerSymbol.O) == false && isWon(playerSymbol.X) == false)
 		{
 			return true; 
 		}
@@ -138,6 +138,21 @@ public class Game
 		}
 		
 		return winner;
+	}
+	
+	public Game clone()
+	{
+		Game clone = new Game();
+		
+		for ( int i = 0 ; i < this.masterGameBoard.board.length; i++ )
+		{
+			clone.masterGameBoard.board[i] = this.masterGameBoard.board[i]; 
+		}
+		
+		clone.masterGameBoard.numEmptySpaces = this.masterGameBoard.numEmptySpaces;
+		
+		
+		return clone;
 	}
 	
 	public void removePosition( int position )

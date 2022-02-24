@@ -6,8 +6,8 @@ import tiktactoe.Game.playerSymbol;
 
 public class GameBoard 
 {
-	private playerSymbol[] board;
-	private int numEmptySpaces;
+	public playerSymbol[] board;
+	public int numEmptySpaces;
 	//The usage of the below member data is not yet implemented 
 	ArrayList<Integer> availablePositions;
 
@@ -20,6 +20,7 @@ public class GameBoard
 		
 		for( int i = 0; i < 9; i++ )
 		{
+			numEmptySpaces++;
 			availablePositions.add(i);
 			board[i] = playerSymbol.Empty; 
 		}
@@ -31,13 +32,7 @@ public class GameBoard
 		board[position] = symbol;
 		
 		//removes the number position from the arraylist of available positions
-		for( int i = 0; i < availablePositions.size(); i++ )
-		{
-			if ( availablePositions.get(i) == position )
-			{
-				availablePositions.remove(i);
-			}
-		}
+		numEmptySpaces--;
 	}
 	
 	public playerSymbol getAt(int position)
@@ -91,6 +86,7 @@ public class GameBoard
 	public void removePostion( int position )
 	{
 		board[position] = playerSymbol.Empty;
+		numEmptySpaces++;
 	}
 	
 
