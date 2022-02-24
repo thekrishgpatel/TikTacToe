@@ -65,6 +65,16 @@ public class Game
 		return false;
 	}
 	
+	public boolean isTie() 
+	{
+		if (masterGameBoard.availableSpaces.size() == 0 && isWon(playerSymbol.O) == false && isWon(playerSymbol.X) == false)
+		{
+			return true; 
+		}
+		
+		return false; 
+	}
+	
 	/**
 	 * This method places a player at a location 'position'
 	 * @param user
