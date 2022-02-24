@@ -67,7 +67,7 @@ public class SmartComputerPlayer extends Player
 				if ( game.isPositionValid(i) )
 				{
 					game.makeMove(this, i);
-					int score = minimax(game, availableSpots); // subtract 1
+					int score = minimax(game, availableSpots); // subtract 1 also set to opposite Symbol
 					game.removePosition(i);
 					
 					if ( score > bestScore )
@@ -91,7 +91,7 @@ public class SmartComputerPlayer extends Player
 				if ( game.isPositionValid(i) )
 				{
 					game.makeMove(this, i);
-					int score = minimax(game, availableSpots); // subtract 1
+					int score = minimax(game, availableSpots); // subtract 1 also set to opposite Symbol
 					game.removePosition(i);
 					
 					if ( score < bestScore )
