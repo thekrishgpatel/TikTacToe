@@ -1,5 +1,7 @@
 package tiktactoe;
 
+import tiktactoe.Game.playerSymbol;
+
 public class Game 
 {
 	
@@ -158,6 +160,36 @@ public class Game
 	public void removePosition( int position )
 	{
 		masterGameBoard.removePostion(position);
+	}
+	
+	public void play( Player p1, Player p2 )
+	{
+		while ( !isWon(p1.symbol) && !isWon(p2.symbol) && !isTie() )
+		{
+			makeMove(p1, p1.getMove(this,masterGameBoard.availablePositions));
+			printBoard();
+			
+			if ( isWon(p1.symbol) ) break;
+			
+			makeMove(p2, p2.getMove(this,masterGameBoard.availablePositions));
+			printBoard();
+		}
+		
+		if ( isWon(p1.symbol)  )
+		{
+			if( p1.symbol == playerSymbol.X )
+				System.out.println("X has won" );
+			else
+				System.out.println("O has won" );	
+		}
+		else
+		{
+			if( p2.symbol == playerSymbol.X )
+				System.out.println("X has won" );
+			else
+				System.out.println("O has won" );
+		}
+
 	}
 
 }

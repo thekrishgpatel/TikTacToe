@@ -53,7 +53,6 @@ public class SmartComputerPlayer extends Player
 		{
 			return -1 * game.masterGameBoard.numEmptySpaces; // * availiableSpots
 		}
-		//TODO: Implement this shit
 		else if(game.isTie())
 		{
 			return 0;
@@ -93,7 +92,16 @@ public class SmartComputerPlayer extends Player
 					// is available 
 					if ( game.isPositionValid(i) )
 					{
-						game.makeMove(this, i);
+						if( this.symbol == playerSymbol.X )
+						{
+							game.makeMove(new HumanPlayer(playerSymbol.O), i);
+						}
+						else
+						{
+							game.makeMove(new HumanPlayer(playerSymbol.X), i);
+						}
+						
+						
 						int score = minimax(game.clone(), availableSpots, true); // subtract 1 also set to opposite Symbol
 						game.removePosition(i);
 
