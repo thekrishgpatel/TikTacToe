@@ -69,13 +69,9 @@ public class Game
 	
 	public boolean isTie() 
 	{
-		if (masterGameBoard.availablePositions.size() == 0 && isWon(playerSymbol.O) == false && isWon(playerSymbol.X) == false)
-		{
-			return true; 
-		}
-		
-		return false; 
+		return (masterGameBoard.numEmptySpaces <= 0 && isWon(playerSymbol.O) == false && isWon(playerSymbol.X) == false) ? true : false;
 	}
+	
 	
 	/**
 	 * This method places a player at a location 'position'
@@ -169,7 +165,7 @@ public class Game
 			makeMove(p1, p1.getMove(this,masterGameBoard.availablePositions));
 			printBoard();
 			
-			if ( isWon(p1.symbol) ) break;
+			if ( isWon(p1.symbol) || isTie() ) break;
 			
 			makeMove(p2, p2.getMove(this,masterGameBoard.availablePositions));
 			printBoard();
@@ -182,12 +178,16 @@ public class Game
 			else
 				System.out.println("O has won" );	
 		}
-		else
+		else if ( isWon(p2.symbol) )
 		{
 			if( p2.symbol == playerSymbol.X )
 				System.out.println("X has won" );
 			else
 				System.out.println("O has won" );
+		}
+		else
+		{
+			System.out.println("Game ended in a tie");
 		}
 
 	}

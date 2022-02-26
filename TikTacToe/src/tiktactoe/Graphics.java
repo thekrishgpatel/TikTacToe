@@ -18,60 +18,61 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	
 	private void initialize() {
 		
-		frame = new JFrame(); 
-		frame.setLayout(new BorderLayout(10, 5));
-		frame.setSize(600, 1000);
-		
-		JPanel panel = new JPanel(); 
-		frame.setVisible(true);
-
+//		frame = new JFrame(); 
+//		frame.setLayout(new BorderLayout(10, 5));
+//		frame.setSize(600, 1000);
+//		
+//		JPanel panel = new JPanel(); 
+//		frame.setVisible(true);
+		frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	
 	public void setButton() 
 	
 	{
-		int x = 0, y = 50, c = 1; 
-		
-		for (int i = 0; i < 9; i++)
-		{
-			c++; 
-			x += 100; 
-
-			button[i] = new JButton(); 
-			
-			if (c % 3 == 0) 
-			{
-				y += 100; 
-				x = 100; 
-			}
-			
-			button[i].setBounds(x, y, 100, 100);
-			
-			frame.add(button[i]); 
-			button[i].addActionListener(null);
-			
-		}
-		
-	}
-	
-	
-	
-	public static void main(String[] arg)
-	{
-		Graphics c = new Graphics();  
-		c.setButton(); 
+        JPanel buttonPanel = new JPanel();
+        JPanel containerPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(3,3));
         
+        for ( int i = 0; i < 9; i++ )
+        {
+        	button[i] = new JButton(Integer.toString(i));
+        	button[i].setFont(new Font("Arial", Font.PLAIN, 40));
+        	button[i].addActionListener(new ActionListener() {
+
+        	    @Override
+        	    public void actionPerformed(ActionEvent e) {
+        	        System.out.println(this);
+        	    }
+        	});
+        	buttonPanel.add(button[i]);
+        }
+        
+        buttonPanel.setPreferredSize(new Dimension(300, 400));
+        containerPanel.add(buttonPanel);
+
+        frame.getContentPane().add(containerPanel);
+        frame.pack();
+        frame.setVisible(true);
+        
+        button[5].setText("X"); 
+		
+		
 	}
+	
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent arg0) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void itemStateChanged(ItemEvent arg0) {
+	public void itemStateChanged(ItemEvent arg0) 
+	{
 		// TODO Auto-generated method stub
 		
 	}

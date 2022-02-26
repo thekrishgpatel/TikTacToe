@@ -20,7 +20,6 @@ public class GameBoard
 		
 		for( int i = 0; i < 9; i++ )
 		{
-			numEmptySpaces++;
 			availablePositions.add(i);
 			board[i] = playerSymbol.Empty; 
 		}

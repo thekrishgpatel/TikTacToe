@@ -116,17 +116,6 @@ public class SmartComputerPlayer extends Player
 				return bestScore; 
 			}
 		}
-		
-		
-		
-//		
-//		if ( winnerSymbol != null )
-//		{
-//			
-//		}
-//
-//		boolean isWon = game.isWon(null);
-
 	}
 
 	
