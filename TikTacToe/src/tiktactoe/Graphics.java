@@ -59,7 +59,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
         
         button[5].setText("X"); 
 		
-		
+		// redo 
 	}
 	
 
