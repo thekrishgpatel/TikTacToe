@@ -16,17 +16,19 @@ public class Game
 		
 	}
 	
+
 	/**
-	 * Generic Constructor of the Game class
+	 * Generic Constructor
 	 */
 	public Game() 
 	{
 		masterGameBoard = new GameBoard();
 	}
 	
+
 	/**
-	 * 
-	 * @param user
+	 * This method assists in the checking of the state of the game. This method returns true if the symbol, passed as a parameter, won and false otherwise
+	 * @param symbol
 	 * @return
 	 */
 	public boolean isWon( playerSymbol symbol )
@@ -67,6 +69,11 @@ public class Game
 		return false;
 	}
 	
+	/**
+	 * This method assists in the checking of the state of the game, returning true if the game is a tie. A tie is a position in the game where there are
+	 * no more viable moves and neither player is in a winning position
+	 * @return
+	 */
 	public boolean isTie() 
 	{
 		return (masterGameBoard.numEmptySpaces <= 0 && isWon(playerSymbol.O) == false && isWon(playerSymbol.X) == false) ? true : false;
@@ -74,17 +81,16 @@ public class Game
 	
 	
 	/**
-	 * This method places a player at a location 'position'
-	 * @param user
+	 * This method gets receives the intended move of the player and checks if that move would be valid. If so the method places a piece at that position
+	 * @param player
 	 * @param position
-	 * @return
 	 */
 	public void makeMove(Player player, int position)
 	{
 		
 		while ( !isPositionValid(position) )
 		{
-			position = player.getMove(this, masterGameBoard.availablePositions);
+			position = player.getMove(this);
 		}
 
 		masterGameBoard.placePiece(player.symbol, position);
@@ -113,16 +119,9 @@ public class Game
 
 	
 	/**
-	 * Using a minimax tree, the method will return a integer representing the next best move for the computer
-	 * @param user
+	 * This method returns the symbol of the player in a winning position. If no player is in a winning position an EMPTY player is returned
 	 * @return
 	 */
-	//TODO: Create the minimax tree, and means of move selection
-	public int findNextMove(playerSymbol user)
-	{
-		return Integer.MIN_VALUE;
-	}
-	
 	public playerSymbol getWinner()
 	{
 		playerSymbol winner = playerSymbol.Empty;
@@ -138,6 +137,10 @@ public class Game
 		return winner;
 	}
 	
+	
+	/**
+	 * This method returns a deep clone of a game object
+	 */
 	public Game clone()
 	{
 		Game clone = new Game();
@@ -153,21 +156,30 @@ public class Game
 		return clone;
 	}
 	
+	/**
+	 * This method is used as a helper function in the minimax method, by removing a piece once placed at a certain postion
+	 * @param position
+	 */
 	public void removePosition( int position )
 	{
 		masterGameBoard.removePostion(position);
 	}
 	
+	/**
+	 * This method takes in two players and begins the game of tiktactoe
+	 * @param p1
+	 * @param p2
+	 */
 	public void play( Player p1, Player p2 )
 	{
 		while ( !isWon(p1.symbol) && !isWon(p2.symbol) && !isTie() )
 		{
-			makeMove(p1, p1.getMove(this,masterGameBoard.availablePositions));
+			makeMove(p1, p1.getMove(this));
 			printBoard();
 			
 			if ( isWon(p1.symbol) || isTie() ) break;
 			
-			makeMove(p2, p2.getMove(this,masterGameBoard.availablePositions));
+			makeMove(p2, p2.getMove(this));
 			printBoard();
 		}
 		

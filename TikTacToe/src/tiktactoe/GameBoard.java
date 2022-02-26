@@ -11,7 +11,9 @@ public class GameBoard
 	//The usage of the below member data is not yet implemented 
 	ArrayList<Integer> availablePositions;
 
-	
+	/**
+	 * Generic Constructor
+	 */
 	public GameBoard() 
 	{
 		numEmptySpaces = 9;
@@ -25,6 +27,11 @@ public class GameBoard
 		}
 	}
 	
+	/**
+	 * This method places a piece at the specified position
+	 * @param symbol
+	 * @param position
+	 */
 	public void placePiece(playerSymbol symbol, int position)
 	{
 
@@ -34,11 +41,19 @@ public class GameBoard
 		numEmptySpaces--;
 	}
 	
+	/**
+	 * This method returns the player symbol at the specified postion
+	 * @param position
+	 * @return
+	 */
 	public playerSymbol getAt(int position)
 	{
 		return board[position];
 	}
 	
+	/**
+	 * This method overrides the existing toString method, to print the current state of the game
+	 */
 	@Override
 	public String toString() 
 	{
@@ -82,6 +97,10 @@ public class GameBoard
 		return stringBoard + "\n";
 	}
 	
+	/**
+	 * This method removes the piece at the specified position
+	 * @param position
+	 */
 	public void removePostion( int position )
 	{
 		board[position] = playerSymbol.Empty;

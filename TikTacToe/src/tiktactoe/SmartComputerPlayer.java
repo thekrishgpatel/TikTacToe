@@ -13,7 +13,7 @@ public class SmartComputerPlayer extends Player
 
 	//The below will implement the minimax algorithm
 	@Override
-	public int getMove(Game game, ArrayList<Integer> availableSpots) 
+	public int getMove(Game game) 
 	{
 		
 		int bestScore = Integer.MIN_VALUE;

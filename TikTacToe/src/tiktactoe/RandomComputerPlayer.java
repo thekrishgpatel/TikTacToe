@@ -12,7 +12,7 @@ public class RandomComputerPlayer extends Player
 	}
 
 	@Override
-	public int getMove(Game game, ArrayList<Integer> availableSpots) 
+	public int getMove(Game game) 
 	{
 		Random rand = new Random();
 		int computerPosition = rand.nextInt(9);

@@ -12,10 +12,20 @@ public class HumanPlayer extends Player
 
 	
 	@Override
-	public int getMove(Game game, ArrayList<Integer> availableSpots) 
+	public int getMove(Game game) 
 	{		
 		System.out.print("Your Position: ");
-		return (new Scanner(System.in)).nextInt();
+		
+		Scanner scanner = new Scanner(System.in);
+		int move = scanner.nextInt();
+		
+		while ( move < 0 || move > 8)
+		{
+			System.out.print("Your Position: ");
+			move = scanner.nextInt();
+		}
+		
+		return move;
 	}
 
 
