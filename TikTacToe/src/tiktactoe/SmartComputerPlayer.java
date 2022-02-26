@@ -25,7 +25,7 @@ public class SmartComputerPlayer extends Player
 			if ( game.isPositionValid(i) )
 			{
 				game.makeMove(this, i);
-				int score = minimax(game.clone(), game.masterGameBoard.numEmptySpaces, true);
+				int score = minimax(game.clone(), false);
 				game.removePosition(i);
 				
 				if ( score > bestScore )
@@ -37,9 +37,10 @@ public class SmartComputerPlayer extends Player
 			}
 		}
 		return move;
+		
 	}
 	
-	public int minimax(Game game, int availableSpots, boolean isMaximizing)
+	public int minimax(Game game, boolean isMaximizing)
 	{
 		//if isMaximizing is true, we are looking for computer players move
 	
@@ -47,19 +48,19 @@ public class SmartComputerPlayer extends Player
 		
 		if ( winnerSymbol == this.symbol )
 		{
-			return 1 * game.masterGameBoard.numEmptySpaces; // * availiableSpots
+			return 1 * game.masterGameBoard.numEmptySpaces; // if game is won
 		}
 		else if ( winnerSymbol != playerSymbol.Empty )
 		{
-			return -1 * game.masterGameBoard.numEmptySpaces; // * availiableSpots
+			return -1 * game.masterGameBoard.numEmptySpaces; // if game is lost
 		}
-		else if(game.isTie())
+		else if(game.isTie()) //if game is a tie
 		{
 			return 0;
 		}
 		else
 		{
-			if (isMaximizing) // comnputer player
+			if (isMaximizing) // computer player
 			{
 				int bestScore = Integer.MIN_VALUE;
 				
@@ -69,7 +70,7 @@ public class SmartComputerPlayer extends Player
 					if ( game.isPositionValid(i) )
 					{
 						game.makeMove(this, i);
-						int score = minimax(game.clone(), availableSpots, false); // subtract 1 also set to opposite Symbol
+						int score = minimax(game.clone(), false); // subtract 1 also set to opposite Symbol
 						game.removePosition(i);
 						
 						if ( score > bestScore )
@@ -92,6 +93,7 @@ public class SmartComputerPlayer extends Player
 					// is available 
 					if ( game.isPositionValid(i) )
 					{
+						//find the opposite symbol
 						if( this.symbol == playerSymbol.X )
 						{
 							game.makeMove(new HumanPlayer(playerSymbol.O), i);
@@ -102,14 +104,11 @@ public class SmartComputerPlayer extends Player
 						}
 						
 						
-						int score = minimax(game.clone(), availableSpots, true); // subtract 1 also set to opposite Symbol
+						int score = minimax(game.clone(), true); // subtract 1 also set to opposite Symbol
 						game.removePosition(i);
 
 						
-						if ( score < bestScore )
-						{
-							bestScore = score;
-						}
+						bestScore = Integer.min(score, bestScore);
 						
 					}
 				}
