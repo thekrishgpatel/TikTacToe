@@ -101,10 +101,69 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 		}
 		
 		button[computerPosition].setText("O");
+		masterGameBoard.placeSymbolAtPosition(p2.symbol, computerPosition);
 		user = true; 
 		
 	}
 	
+	/*
+	public void play(Player p1, Player p2, int i)
+	{
+		
+		while ( masterGameBoard.getWinningSymbol() == playerSymbol.Empty  && !masterGameBoard.isTie() )
+		{
+			if (p1 instanceof HumanPlayer)
+			{
+				if (user = true)
+				{
+					if (button[i].getText() == "")
+					{
+						button[i].setText("X");
+						masterGameBoard.placeSymbolAtPosition(p1.symbol, i);
+						user = false; 
+						if (check() != 0)
+						{
+							nextTurn(); 
+						}
+					}
+				}
+				
+			}
+			
+			//makeMove(p1, p1.getMove(masterGameBoard));
+			//printBoard();
+			
+			if ( masterGameBoard.getWinningSymbol() == p1.symbol || masterGameBoard.isTie() ) break;
+			
+			//makeMove(p2, p2.getMove(masterGameBoard));
+			//printBoard();
+		}
+		
+	}
+	*/ 
+	
+	
+	public void manualPlay(int i)
+	{
+		if (user = true)
+		{
+			if (button[i].getText() == "")
+			{
+				button[i].setText("X");
+				masterGameBoard.placeSymbolAtPosition(p1.symbol, i);
+				user = false; 
+				if (check() != 0)
+				{
+					nextTurn(); 
+				}
+			}
+		}
+	}
+	
+	public void checkWin()
+	{
+		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent click) 
@@ -113,18 +172,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 		{
 			if (click.getSource() == button[i])
 			{
-				if (user == true)
-				{
-					if (button[i].getText() == "")
-					{
-						button[i].setText("X");
-						user = false; 
-						if (check() != 0)
-						{
-							nextTurn(); 
-						}
-					}
-				}
+				manualPlay(i); 
 			}
 		
 		}
