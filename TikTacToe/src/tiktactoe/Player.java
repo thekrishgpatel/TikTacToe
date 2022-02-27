@@ -12,5 +12,5 @@ public abstract class Player
 		this.symbol = symbol;
 	}
 	
-	public abstract int getMove(Game game);
+	public abstract int getMove(GameBoard gameBoard);
 }

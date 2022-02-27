@@ -13,7 +13,7 @@ public class SmartComputerPlayer extends Player
 
 	//The below will implement the minimax algorithm
 	@Override
-	public int getMove(Game game) 
+	public int getMove(GameBoard gameBoard) 
 	{
 		
 		int bestScore = Integer.MIN_VALUE;
@@ -22,11 +22,13 @@ public class SmartComputerPlayer extends Player
 		for ( int i = 0; i < 9; i++ )
 		{
 			// is available 
-			if ( game.isPositionValid(i) )
+			if ( gameBoard.isPositionEmpty(i) )
 			{
-				game.makeMove(this, i);
-				int score = minimax(game.clone(), false);
-				game.removePosition(i);
+				gameBoard.placeSymbolAtPosition(symbol, i);
+				//game.makeMove(this, i);
+				int score = minimax(gameBoard.clone(), false);
+				gameBoard.removeSymbolAtPosition(i);
+				//game.removePosition(i);
 				
 				if ( score > bestScore )
 				{
@@ -40,21 +42,21 @@ public class SmartComputerPlayer extends Player
 		
 	}
 	
-	public int minimax(Game game, boolean isMaximizing)
+	public int minimax(GameBoard gameBoard, boolean isMaximizing)
 	{
 		//if isMaximizing is true, we are looking for computer players move
 	
-		playerSymbol winnerSymbol = game.getWinner();
+		playerSymbol winnerSymbol = gameBoard.getWinningSymbol();
 		
 		if ( winnerSymbol == this.symbol )
 		{
-			return 1 * game.masterGameBoard.numEmptySpaces; // if game is won
+			return 1 * gameBoard.numEmptySpaces; // if game is won
 		}
 		else if ( winnerSymbol != playerSymbol.Empty )
 		{
-			return -1 * game.masterGameBoard.numEmptySpaces; // if game is lost
+			return -1 * gameBoard.numEmptySpaces; // if game is lost
 		}
-		else if(game.isTie()) //if game is a tie
+		else if(gameBoard.isTie()) //if game is a tie
 		{
 			return 0;
 		}
@@ -67,11 +69,11 @@ public class SmartComputerPlayer extends Player
 				for ( int i = 0; i < 9; i++ )
 				{
 					// is available 
-					if ( game.isPositionValid(i) )
+					if ( gameBoard.isPositionEmpty(i) )
 					{
-						game.makeMove(this, i);
-						int score = minimax(game.clone(), false); // subtract 1 also set to opposite Symbol
-						game.removePosition(i);
+						gameBoard.placeSymbolAtPosition(this.symbol,i);
+						int score = minimax(gameBoard.clone(), false); // subtract 1 also set to opposite Symbol
+						gameBoard.removeSymbolAtPosition(i);
 						
 						if ( score > bestScore )
 						{
@@ -83,29 +85,29 @@ public class SmartComputerPlayer extends Player
 				
 				return bestScore; 
 			}
-			
-			else { // human player
+			else 
+			{ // human player
 				
 				int bestScore = Integer.MAX_VALUE;
 				
 				for ( int i = 0; i < 9; i++ )
 				{
 					// is available 
-					if ( game.isPositionValid(i) )
+					if ( gameBoard.isPositionEmpty(i) )
 					{
 						//find the opposite symbol
 						if( this.symbol == playerSymbol.X )
 						{
-							game.makeMove(new HumanPlayer(playerSymbol.O), i);
+							gameBoard.placeSymbolAtPosition(playerSymbol.O, i);
 						}
 						else
 						{
-							game.makeMove(new HumanPlayer(playerSymbol.X), i);
+							gameBoard.placeSymbolAtPosition(playerSymbol.X, i);
 						}
 						
 						
-						int score = minimax(game.clone(), true); // subtract 1 also set to opposite Symbol
-						game.removePosition(i);
+						int score = minimax(gameBoard.clone(), true); // subtract 1 also set to opposite Symbol
+						gameBoard.removeSymbolAtPosition(i);
 
 						
 						bestScore = Integer.min(score, bestScore);

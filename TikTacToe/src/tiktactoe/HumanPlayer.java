@@ -12,7 +12,7 @@ public class HumanPlayer extends Player
 
 	
 	@Override
-	public int getMove(Game game) 
+	public int getMove(GameBoard gameBoard) 
 	{		
 		System.out.print("Your Position: ");
 		
