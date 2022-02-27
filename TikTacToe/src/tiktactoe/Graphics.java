@@ -4,16 +4,25 @@ import java.lang.Object;
 import java.util.Random;
 import java.awt.*;  
 import java.awt.event.*;  
-import javax.swing.*;  
+import javax.swing.*;
+
+import tiktactoe.Game.playerSymbol;  
 
 public class Graphics extends JFrame implements ItemListener, ActionListener {
 	
 	JButton button[] = new JButton[9]; 
 	JFrame frame; 
+	GameBoard masterGameBoard;
+	Player p1;
+	Player p2;
+	
 	boolean user = true; 
 	
-	protected Graphics() {
-		
+	protected Graphics(GameBoard gameBoard, Player p1, Player p2) 
+	{
+		this.p1 = p1;
+		this.p2 = p2;
+		masterGameBoard = gameBoard;
 		initialize(); 
 		
 	}
@@ -80,12 +89,15 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	}
 	
 	public void nextTurn() {
-		Random rand = new Random();
-		int computerPosition = rand.nextInt(9);
+//		Random rand = new Random();
+//		int computerPosition = rand.nextInt(9);
+		
+		int computerPosition = p1.getMove(masterGameBoard);
 		
 		while (button[computerPosition].getText() != "")
 		{
-			computerPosition = rand.nextInt(9);
+			computerPosition = p1.getMove(masterGameBoard);
+//			computerPosition = rand.nextInt(9);
 		}
 		
 		button[computerPosition].setText("O");

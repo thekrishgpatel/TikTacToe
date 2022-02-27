@@ -213,5 +213,11 @@ public class Game
 //		}
 
 	}
+	
+	public void playWithGraphics(Player p1, Player p2)
+	{
+		Graphics c = new Graphics(masterGameBoard, p1, p2);  
+	}
+	
 
 }
