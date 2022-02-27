@@ -10,9 +10,15 @@ public class Tester {
 		
 //		g1.play( new SmartComputerPlayer(playerSymbol.O), new HumanPlayer(playerSymbol.X) );
 //		g1.play( new SmartComputerPlayer(playerSymbol.O), new SmartComputerPlayer(playerSymbol.X) );
+<<<<<<< HEAD
 //		g1.play( new SmartComputerPlayer(playerSymbol.O), new RandomComputerPlayer(playerSymbol.X) );
 		Graphics c = new Graphics();  
 		c.setButton(); 
+=======
+		g1.play( new SmartComputerPlayer(playerSymbol.O), new RandomComputerPlayer(playerSymbol.X) );
+		Graphics c = new Graphics();  
+//		c.setButton(); 
+>>>>>>> 0e6b0c7235ea9fe074b6fd7cf284f27017a0b7e0
 	}
 
 }
