@@ -152,6 +152,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 				button[i].setText("X");
 				masterGameBoard.placeSymbolAtPosition(p1.symbol, i);
 				user = false; 
+				checkWin(); 
 				if (check() != 0)
 				{
 					nextTurn(); 
@@ -162,7 +163,19 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	
 	public void checkWin()
 	{
-		
+		if (masterGameBoard.getWinningSymbol() == playerSymbol.X)
+		{
+			System.out.println("X"); 
+		}
+		else if (masterGameBoard.getWinningSymbol() == playerSymbol.O)
+		{
+			System.out.println("O"); 
+		}
+		else if (masterGameBoard.isTie())
+		{
+			System.out.println("Tie"); 
+		}
+			
 	}
 
 	@Override
