@@ -12,7 +12,7 @@ public class Tester {
 //		g1.play( new SmartComputerPlayer(playerSymbol.O), new SmartComputerPlayer(playerSymbol.X) );
 		g1.play( new SmartComputerPlayer(playerSymbol.O), new RandomComputerPlayer(playerSymbol.X) );
 		Graphics c = new Graphics();  
-		c.setButton(); 
+//		c.setButton(); 
 	}
 
 }
