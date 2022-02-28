@@ -185,6 +185,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 		{
 			if (click.getSource() == button[i])
 			{
+				checkWin(); 
 				manualPlay(i); 
 			}
 		
