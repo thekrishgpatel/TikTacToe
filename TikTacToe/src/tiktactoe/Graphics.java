@@ -21,6 +21,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
     JLabel containerPanel = new JLabel();
     JPanel infoPanel = new JPanel(); 
     JPanel tPanel = new JPanel(); 
+    boolean restartGame = false; 
 	
 	boolean user = true; 
 	
@@ -164,13 +165,20 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	
 	public void newGame()
 	{
-		for (int i = 0; i < 9; i++)
+		if (restartGame = true)
 		{
-			if (button[i].getText() != "")
+			
+			for (int i = 0; i < 9; i++)
 			{
-				button[i].setText("");
-				masterGameBoard.placeSymbolAtPosition(restart, i);
+				button[i].setEnabled(true); 
+				if (button[i].getText() != "")
+				{
+					button[i].setText("");
+					masterGameBoard = new GameBoard();
+				}
 			}
+			
+			user = true; 
 		}
 	}
 	
@@ -188,6 +196,11 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 				{
 					nextTurn(); 
 				}
+				else 
+				{
+					user = true; 
+					newGame(); 
+				}
 			}
 		}
 	}
@@ -200,7 +213,12 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 			{
 				button[j].setEnabled(false);
 			}
+			containerPanel.setText("X Wins"); 
 			System.out.println("X"); 
+			restartGame = true; 
+			newGame();
+			Graphics newc= new Graphics(masterGameBoard, p1, p2, restart); 
+			
 		}
 		else if (masterGameBoard.getWinningSymbol() == playerSymbol.O)
 		{
@@ -210,6 +228,13 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 			}
 			containerPanel.setText("O Wins"); 
 			System.out.println("O"); 
+			restartGame = true; 
+			newGame(); 
+			frame.setVisible(false);
+			frame.dispose(); 
+			Graphics newc= new Graphics(masterGameBoard, p1, p2, restart); 
+			
+			
 		}
 		else if (masterGameBoard.isTie())
 		{
@@ -219,6 +244,12 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 			}
 			containerPanel.setText("Tie"); 
 			System.out.println("Tie"); 
+			restartGame = true; 
+			newGame(); 
+			frame.setVisible(false);
+			frame.dispose(); 
+			Graphics newc= new Graphics(masterGameBoard, p1, p2, restart); 
+			
 		}
 			
 	}
