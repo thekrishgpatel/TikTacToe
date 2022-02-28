@@ -15,6 +15,9 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	GameBoard masterGameBoard;
 	Player p1;
 	Player p2;
+	JPanel buttonPanel = new JPanel();
+    JLabel containerPanel = new JLabel();
+    JPanel infoPanel = new JPanel(); 
 	
 	boolean user = true; 
 	
@@ -35,14 +38,10 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
         frame.setLayout(new BorderLayout());
         frame.setVisible(true);
         
-        JPanel buttonPanel = new JPanel();
-        JLabel containerPanel = new JLabel();
-        JPanel infoPanel = new JPanel(); 
-        
-        infoPanel.setLayout(new BorderLayout()); 
-        infoPanel.setBounds(0, 0, 500, 200); 
+    
         
         buttonPanel.setLayout(new GridLayout(3,3));
+        buttonPanel.setBackground(new Color(255,255,255));
         
         for ( int i = 0; i < 9; i++ )
         {
@@ -53,10 +52,17 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
         	
         }
         
-        containerPanel.setBackground(new Color(255,0,0));
+        containerPanel.setBackground(new Color(150,150,150));
+        containerPanel.setText("TicTacToe");
+        containerPanel.setOpaque(true); 
+        
+        infoPanel.setLayout(new BorderLayout()); 
+        infoPanel.setSize(500,300);
+        //infoPanel.setBounds(0, 0, 500, 500); 
+        
         infoPanel.add(containerPanel); 
         
-        frame.add(infoPanel, BorderLayout.SOUTH); 
+        frame.add(infoPanel, BorderLayout.NORTH); 
         frame.add(buttonPanel); 
         	
         //buttonPanel.setPreferredSize(new Dimension(300, 400));
@@ -102,6 +108,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 		
 		button[computerPosition].setText("O");
 		masterGameBoard.placeSymbolAtPosition(p2.symbol, computerPosition);
+		checkWin(); 
 		user = true; 
 		
 	}
@@ -165,14 +172,28 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	{
 		if (masterGameBoard.getWinningSymbol() == playerSymbol.X)
 		{
+			for (int j = 0; j < 9; j++)
+			{
+				button[j].setEnabled(false);
+			}
 			System.out.println("X"); 
 		}
 		else if (masterGameBoard.getWinningSymbol() == playerSymbol.O)
 		{
+			for (int j = 0; j < 9; j++)
+			{
+				button[j].setEnabled(false);
+			}
+			containerPanel.setText("O Wins"); 
 			System.out.println("O"); 
 		}
 		else if (masterGameBoard.isTie())
 		{
+			for (int j = 0; j < 9; j++)
+			{
+				button[j].setEnabled(false);
+			}
+			containerPanel.setText("Tie"); 
 			System.out.println("Tie"); 
 		}
 			
@@ -185,7 +206,6 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 		{
 			if (click.getSource() == button[i])
 			{
-				checkWin(); 
 				manualPlay(i); 
 			}
 		
