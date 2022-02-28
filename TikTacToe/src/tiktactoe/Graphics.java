@@ -16,6 +16,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	GameBoard masterGameBoard;
 	Player p1;
 	Player p2;
+	playerSymbol restart;  
 	JPanel buttonPanel = new JPanel();
     JLabel containerPanel = new JLabel();
     JPanel infoPanel = new JPanel(); 
@@ -23,10 +24,11 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	
 	boolean user = true; 
 	
-	protected Graphics(GameBoard gameBoard, Player p1, Player p2) 
+	protected Graphics(GameBoard gameBoard, Player p1, Player p2, playerSymbol restart) 
 	{
 		this.p1 = p1;
 		this.p2 = p2;
+		this.restart = restart; 
 		masterGameBoard = gameBoard;
 		initialize(); 
 		
@@ -35,10 +37,10 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	private void initialize() {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+        frame.setSize(500, 600);
         frame.getContentPane().setBackground(new Color(50,50,50));
         frame.setLayout(new BorderLayout());
-        frame.setVisible(true);
+        
         
         containerPanel.setBackground(new Color(150,150,150));
         containerPanel.setText("TicTacToe");
@@ -46,20 +48,19 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
         containerPanel.add(restartButton); 
         
         infoPanel.setLayout(new BorderLayout()); 
-        //infoPanel.setSize(500,300);
-        infoPanel.setBounds(0, 50, 500, 400); 
-        
-        
-        infoPanel.add(containerPanel); 
-        //infoPanel.add(buttonPanel); 
-        
+        infoPanel.setSize(500,300);
+        infoPanel.setVisible(true);
+        infoPanel.setBounds(0, 0, 500, 200); 
+     
         //tPanel.setLayout(new BorderLayout());
-        //tPanel.setBounds(0 , 50, 500, 200);
+        //tPanel.setBounds(0 , 0, 500, 200);
+        
         
         //frame.add(tPanel, BorderLayout.NORTH); 
         
         buttonPanel.setLayout(new GridLayout(3,3));
-        buttonPanel.setBackground(new Color(255,255,255));
+        buttonPanel.setBounds(0, 200, 500, 400);
+        buttonPanel.setBackground(new Color(0,255,255));
         
         for ( int i = 0; i < 9; i++ )
         {
@@ -70,6 +71,10 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
         	
         }
         
+        infoPanel.add(containerPanel); 
+        //infoPanel.add(tPanel, BorderLayout.NORTH); 
+        
+        //infoPanel.add(buttonPanel); 
         frame.add(infoPanel, BorderLayout.NORTH); 
         frame.add(buttonPanel); 
         	
@@ -77,7 +82,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
         //containerPanel.add(buttonPanel);
         //frame.getContentPane().add(containerPanel);
         //frame.pack();
-        
+        frame.setVisible(true);
  
 	}
 
@@ -157,6 +162,17 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	}
 	*/ 
 	
+	public void newGame()
+	{
+		for (int i = 0; i < 9; i++)
+		{
+			if (button[i].getText() != "")
+			{
+				button[i].setText("");
+				masterGameBoard.placeSymbolAtPosition(restart, i);
+			}
+		}
+	}
 	
 	public void manualPlay(int i)
 	{

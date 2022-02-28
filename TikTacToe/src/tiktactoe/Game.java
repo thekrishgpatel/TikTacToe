@@ -214,9 +214,9 @@ public class Game
 
 	}
 	
-	public void playWithGraphics(Player p1, Player p2)
+	public void playWithGraphics(Player p1, Player p2, playerSymbol restart)
 	{
-		Graphics c = new Graphics(masterGameBoard, p1, p2);  
+		Graphics c = new Graphics(masterGameBoard, p1, p2, restart);  
 	}
 	
 
