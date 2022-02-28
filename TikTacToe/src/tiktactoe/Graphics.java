@@ -12,7 +12,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	
 	JButton button[] = new JButton[9]; 
 	JButton restartButton = new JButton(); 
-	JFrame frame; 
+	JFrame frame = new JFrame(); 
 	GameBoard masterGameBoard;
 	Player p1;
 	Player p2;
@@ -33,10 +33,9 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	}
 	
 	private void initialize() {
-		
-		frame = new JFrame();
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 600);
+        
         frame.getContentPane().setBackground(new Color(50,50,50));
         frame.setLayout(new BorderLayout());
         frame.setVisible(true);
@@ -49,6 +48,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
         infoPanel.setLayout(new BorderLayout()); 
         //infoPanel.setSize(500,300);
         infoPanel.setBounds(0, 50, 500, 400); 
+        
         
         infoPanel.add(containerPanel); 
         //infoPanel.add(buttonPanel); 
@@ -71,7 +71,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
         }
         
         frame.add(infoPanel, BorderLayout.NORTH); 
-        //frame.add(buttonPanel); 
+        frame.add(buttonPanel); 
         	
         //buttonPanel.setPreferredSize(new Dimension(300, 400));
         //containerPanel.add(buttonPanel);

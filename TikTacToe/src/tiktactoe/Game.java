@@ -70,7 +70,7 @@ public class Game
 //	}
 //	
 
-	
+	// recover
 	
 	/**
 	 * This method gets receives the intended move of the player and checks if that move would be valid. If so the method places a piece at that position
