@@ -11,6 +11,7 @@ import tiktactoe.Game.playerSymbol;
 public class Graphics extends JFrame implements ItemListener, ActionListener {
 	
 	JButton button[] = new JButton[9]; 
+	JButton restartButton = new JButton(); 
 	JFrame frame; 
 	GameBoard masterGameBoard;
 	Player p1;
@@ -18,6 +19,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	JPanel buttonPanel = new JPanel();
     JLabel containerPanel = new JLabel();
     JPanel infoPanel = new JPanel(); 
+    JPanel tPanel = new JPanel(); 
 	
 	boolean user = true; 
 	
@@ -35,10 +37,26 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 		frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 600);
+        frame.getContentPane().setBackground(new Color(50,50,50));
         frame.setLayout(new BorderLayout());
         frame.setVisible(true);
         
-    
+        containerPanel.setBackground(new Color(150,150,150));
+        containerPanel.setText("TicTacToe");
+        containerPanel.setOpaque(true); 
+        containerPanel.add(restartButton); 
+        
+        infoPanel.setLayout(new BorderLayout()); 
+        //infoPanel.setSize(500,300);
+        infoPanel.setBounds(0, 50, 500, 400); 
+        
+        infoPanel.add(containerPanel); 
+        //infoPanel.add(buttonPanel); 
+        
+        //tPanel.setLayout(new BorderLayout());
+        //tPanel.setBounds(0 , 50, 500, 200);
+        
+        //frame.add(tPanel, BorderLayout.NORTH); 
         
         buttonPanel.setLayout(new GridLayout(3,3));
         buttonPanel.setBackground(new Color(255,255,255));
@@ -52,18 +70,8 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
         	
         }
         
-        containerPanel.setBackground(new Color(150,150,150));
-        containerPanel.setText("TicTacToe");
-        containerPanel.setOpaque(true); 
-        
-        infoPanel.setLayout(new BorderLayout()); 
-        infoPanel.setSize(500,300);
-        //infoPanel.setBounds(0, 0, 500, 500); 
-        
-        infoPanel.add(containerPanel); 
-        
         frame.add(infoPanel, BorderLayout.NORTH); 
-        frame.add(buttonPanel); 
+        //frame.add(buttonPanel); 
         	
         //buttonPanel.setPreferredSize(new Dimension(300, 400));
         //containerPanel.add(buttonPanel);
