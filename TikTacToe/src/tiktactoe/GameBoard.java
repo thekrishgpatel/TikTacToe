@@ -139,15 +139,20 @@ public class GameBoard
 		return false;
 	}
 	
-	
 	/**
 	 * This method assists in the checking of the state of the game, returning true if the game is a tie. A tie is a position in the game where there are
 	 * no more viable moves and neither player is in a winning position
 	 * @return
 	 */
 	public boolean isTie() 
-	{
-		return (numEmptySpaces <= 0 && getWinningSymbol() == playerSymbol.Empty) ? true : false;
+	{	
+		if ( numEmptySpaces <= 0 && getWinningSymbol() == playerSymbol.Empty )
+		{
+			return true;
+		}
+		return false;
+			
+			
 	}
 	
 	

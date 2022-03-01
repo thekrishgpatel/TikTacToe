@@ -19,6 +19,12 @@ public class SmartComputerPlayer extends Player
 		int bestScore = Integer.MIN_VALUE;
 		int move = Integer.MIN_VALUE;
 		
+//		if( gameBoard.isPositionEmpty(4) )
+//		{
+//			System.out.println("called");
+//			return 4;
+//		}
+		
 		for ( int i = 0; i < 9; i++ )
 		{
 			// is available 
@@ -108,7 +114,6 @@ public class SmartComputerPlayer extends Player
 						
 						int score = minimax(gameBoard.clone(), true); // subtract 1 also set to opposite Symbol
 						gameBoard.removeSymbolAtPosition(i);
-
 						
 						bestScore = Integer.min(score, bestScore);
 						
