@@ -122,8 +122,9 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 		
 		button[computerPosition].setText("O");
 		masterGameBoard.placeSymbolAtPosition(p2.symbol, computerPosition);
+		checkWin();
 		user = true; 
-		checkWin(); 
+		
 		
 	}
 	
@@ -166,6 +167,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	
 	public void newGame()
 	{
+		
 			for (int i = 0; i < 9; i++)
 			{
 				button[i].setEnabled(true); 
@@ -228,7 +230,6 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	
 		else if (masterGameBoard.getWinningSymbol() == playerSymbol.X)
 		{
-			
 			for (int j = 0; j < 9; j++)
 			{
 				button[j].setEnabled(false);
@@ -259,6 +260,7 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 		{
 			if (click.getSource() == button[i])
 			{
+				//checkWin(); 
 				manualPlay(i); 
 			}
 		
