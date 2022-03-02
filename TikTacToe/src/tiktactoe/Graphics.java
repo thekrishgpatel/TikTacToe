@@ -112,18 +112,18 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 //		Random rand = new Random();
 //		int computerPosition = rand.nextInt(9);
 		
-		int computerPosition = p1.getMove(masterGameBoard);
+		int computerPosition = p2.getMove(masterGameBoard);
 		
 		while (button[computerPosition].getText() != "")
 		{
-			computerPosition = p1.getMove(masterGameBoard);
+			computerPosition = p2.getMove(masterGameBoard);
 //			computerPosition = rand.nextInt(9);
 		}
 		
 		button[computerPosition].setText("O");
 		masterGameBoard.placeSymbolAtPosition(p2.symbol, computerPosition);
-		checkWin(); 
 		user = true; 
+		checkWin(); 
 		
 	}
 	
@@ -163,24 +163,35 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	}
 	*/ 
 	
+	
 	public void newGame()
 	{
-		if (restartGame = true)
-		{
-			
 			for (int i = 0; i < 9; i++)
 			{
 				button[i].setEnabled(true); 
+				
 				if (button[i].getText() != "")
 				{
 					button[i].setText("");
-					masterGameBoard = new GameBoard();
+					masterGameBoard.placeSymbolAtPosition(restart, i);
 				}
 			}
 			
-			user = true; 
-		}
+			masterGameBoard.numEmptySpaces = 9; 
+			
+			frame.setVisible(false);
+			frame.dispose(); 
+						
+			Game g1 = new Game();
+			
+			g1.playWithGraphics(new HumanPlayer(playerSymbol.X),new SmartComputerPlayer(playerSymbol.O), playerSymbol.Empty);
+			
+			//user = true; 
+			
+			//Graphics newc= new Graphics(masterGameBoard, p1, p2, restart); 
+	
 	}
+	
 	
 	public void manualPlay(int i)
 	{
@@ -190,16 +201,12 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 			{
 				button[i].setText("X");
 				masterGameBoard.placeSymbolAtPosition(p1.symbol, i);
-				user = false; 
 				checkWin(); 
+				user = false; 
+				
 				if (check() != 0)
 				{
 					nextTurn(); 
-				}
-				else 
-				{
-					user = true; 
-					newGame(); 
 				}
 			}
 		}
@@ -207,17 +214,28 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 	
 	public void checkWin()
 	{
-		if (masterGameBoard.getWinningSymbol() == playerSymbol.X)
+		if (masterGameBoard.isTie() == true)
 		{
+			for (int j = 0; j < 9; j++)
+			{
+				button[j].setEnabled(false);
+			}
+			containerPanel.setText("Tie"); 
+			System.out.println("Tie"); 
+			newGame(); 
+			
+		}
+	
+		else if (masterGameBoard.getWinningSymbol() == playerSymbol.X)
+		{
+			
 			for (int j = 0; j < 9; j++)
 			{
 				button[j].setEnabled(false);
 			}
 			containerPanel.setText("X Wins"); 
 			System.out.println("X"); 
-			restartGame = true; 
 			newGame();
-			Graphics newc= new Graphics(masterGameBoard, p1, p2, restart); 
 			
 		}
 		else if (masterGameBoard.getWinningSymbol() == playerSymbol.O)
@@ -228,30 +246,10 @@ public class Graphics extends JFrame implements ItemListener, ActionListener {
 			}
 			containerPanel.setText("O Wins"); 
 			System.out.println("O"); 
-			restartGame = true; 
 			newGame(); 
-			frame.setVisible(false);
-			frame.dispose(); 
-			Graphics newc= new Graphics(masterGameBoard, p1, p2, restart); 
-			
-			
+
 		}
-		else if (masterGameBoard.isTie())
-		{
-			for (int j = 0; j < 9; j++)
-			{
-				button[j].setEnabled(false);
-			}
-			containerPanel.setText("Tie"); 
-			System.out.println("Tie"); 
-			restartGame = true; 
-			newGame(); 
-			frame.setVisible(false);
-			frame.dispose(); 
-			Graphics newc= new Graphics(masterGameBoard, p1, p2, restart); 
-			
-		}
-			
+		
 	}
 
 	@Override

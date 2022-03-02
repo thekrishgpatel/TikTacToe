@@ -146,7 +146,7 @@ public class GameBoard
 	 */
 	public boolean isTie() 
 	{	
-		if ( numEmptySpaces <= 0 && getWinningSymbol() == playerSymbol.Empty )
+		if ( numEmptySpaces <= 0 && !(isWon(playerSymbol.O)) && !(isWon(playerSymbol.X))) //getWinningSymbol() == playerSymbol.Empty ) // try deleting =
 		{
 			return true;
 		}

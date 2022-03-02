@@ -56,11 +56,11 @@ public class SmartComputerPlayer extends Player
 		
 		if ( winnerSymbol == this.symbol )
 		{
-			return 1 * gameBoard.numEmptySpaces; // if game is won
+			return 1 + gameBoard.numEmptySpaces; // if game is won
 		}
 		else if ( winnerSymbol != playerSymbol.Empty )
 		{
-			return -1 * gameBoard.numEmptySpaces; // if game is lost
+			return -1 - gameBoard.numEmptySpaces; // if game is lost
 		}
 		else if(gameBoard.isTie()) //if game is a tie
 		{
